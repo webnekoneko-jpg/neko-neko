@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neko Neko Bakery & Cake 🐾✨</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neko: {
+                            cream: '#FFF9F0',
+                            warm: '#FFF2E1',
+                            pink: '#FFD6E0',
+                            peach: '#FFC8A2',
+                            brown: '#8D5B4C',
+                            darkbrown: '#5C3A21',
+                            accent: '#FF8B94'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Fredoka', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FFF9F0;
+            color: #5C3A21;
+        }
+        h1, h2, h3, .font-brand {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #FFF2E1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #FFC8A2;
+            border-radius: 9999px;
+        }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #receipt-print-area, #receipt-print-area * {
+                visibility: visible;
+            }
+            #receipt-print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="relative min-h-screen pb-20">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-neko-cream/90 backdrop-blur-md border-b border-neko-peach/30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                <div class="w-12 h-12 rounded-full bg-neko-pink flex items-center justify-center text-neko-darkbrown text-2xl shadow-inner group-hover:scale-105 transition">
+                    🐱
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-wide text-neko-darkbrown leading-none">Neko Neko</h1>
+                    <span class="text-xs font-semibold tracking-wider text-neko-brown uppercase">Bakery & Cake</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-2 font-medium text-neko-brown">
+                <a href="#tentang" class="px-3 py-2 rounded-full hover:bg-neko-warm hover:text-neko-darkbrown transition flex items-center gap-1.5 text-xs">
+                    <i class="fa-solid fa-heart text-neko-accent"></i> Tentang Kami
+                </a>
+                <a href="#promo" class="px-3 py-2 rounded-full hover:bg-neko-warm hover:text-neko-darkbrown transition flex items-center gap-1.5 text-xs text-red-500 font-bold">
+                    <i class="fa-solid fa-fire"></i> Promo
+                </a>
+                <a href="#lacak" class="px-3 py-2 rounded-full hover:bg-neko-warm hover:text-neko-darkbrown transition flex items-center gap-1.5 text-xs">
+                    <i class="fa-solid fa-truck-fast"></i> Lacak Pesanan
+                </a>
+                <a href="#katalog" class="px-3 py-2 rounded-full hover:bg-neko-warm hover:text-neko-darkbrown transition flex items-center gap-1.5 text-xs">
+                    <i class="fa-solid fa-basket-shopping"></i> Katalog Roti
+                </a>
+                <a href="#kontak" class="px-3 py-2 rounded-full hover:bg-neko-warm hover:text-neko-darkbrown transition flex items-center gap-1.5 text-xs">
+                    <i class="fa-solid fa-location-dot"></i> Kontak
+                </a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button onclick="openCart()" class="relative p-3 bg-neko-warm hover:bg-neko-pink/50 rounded-full transition shadow-sm text-neko-darkbrown flex items-center justify-center" title="Keranjang Belanja">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-neko-accent text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+        <div class="bg-gradient-to-r from-neko-pink/40 via-neko-warm to-neko-peach/30 rounded-3xl p-8 md:p-12 shadow-sm border border-neko-peach/40 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="space-y-4 max-w-xl text-center md:text-left">
+                <div class="inline-flex items-center gap-2 bg-white/80 px-4 py-1.5 rounded-full text-xs font-bold text-neko-brown shadow-sm">
+                    <span class="animate-bounce">🍞</span> Fresh Baked Every Day!
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-neko-darkbrown leading-tight">
+                    Kehangatan Roti Manis & Lembut Khas Neko Neko ✨
+                </h2>
+                <p class="text-neko-brown/80 text-sm md:text-base leading-relaxed">
+                    Dibuat dengan bahan pilihan berkualitas tinggi, penuh cinta, dan bentuk imut yang siap menceriakan harimu!
+                </p>
+                <div class="pt-2 flex flex-wrap gap-4 justify-center md:justify-start">
+                    <a href="#katalog" class="bg-neko-darkbrown text-white px-6 py-3 rounded-full font-semibold hover:bg-neko-brown transition shadow-md flex items-center gap-2">
+                        <i class="fa-solid fa-utensils text-sm"></i> Lihat Menu Roti
+                    </a>
+                    <a href="https://wa.me/6282386406010?text=Halo%20Neko%20Neko%20Bakery,%20saya%20ingin%20tanya%20seputar%20pemesanan" target="_blank" class="bg-white border border-neko-peach text-neko-darkbrown px-6 py-3 rounded-full font-semibold hover:bg-neko-warm transition shadow-sm flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-green-500 text-lg"></i> Chat WA Admin
+                    </a>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 flex justify-center">
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80" alt="Fresh Bakery" class="rounded-2xl shadow-xl w-full max-w-md object-cover h-72 md:h-80 hover:scale-105 transition duration-300">
+            </div>
+        </div>
+    </section>
+
+    <!-- PROMO / DISKON HARIAN SECTION -->
+    <section id="promo" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="bg-gradient-to-r from-orange-100 via-amber-50 to-orange-100 rounded-3xl p-6 md:p-8 border-2 border-orange-200 shadow-md">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 text-center md:text-left">
+                <div>
+                    <span class="inline-flex items-center gap-1.5 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                        <i class="fa-solid fa-fire"></i> Flash Sale & Promo Spesial
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-bold text-neko-darkbrown mt-2">Diskon Hari Ini 💸✨</h2>
+                    <p class="text-xs md:text-sm text-neko-brown/80 mt-1">Pesan sekarang sebelum kehabisan! Penawaran spesial khusus hari ini.</p>
+                </div>
+                <div class="bg-white/90 px-4 py-2 rounded-2xl border border-orange-200 text-xs font-bold text-orange-600 shadow-inner flex items-center gap-2">
+                    <i class="fa-regular fa-clock text-base"></i>
+                    <span>Berakhir dalam: <span id="promo-countdown" class="font-extrabold text-red-500">05:42:18</span></span>
+                </div>
+            </div>
+
+            <!-- Promo Grid -->
+            <div id="promo-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+    </section>
+
+    <!-- LACAK PESANAN SECTION -->
+    <section id="lacak" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white rounded-3xl p-8 md:p-10 border border-neko-peach/30 shadow-sm max-w-3xl mx-auto">
+            <div class="text-center space-y-2 mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest bg-neko-warm text-neko-brown px-3 py-1 rounded-full">Sistem Transparansi</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-neko-darkbrown">Lacak Status Pesanan Kamu 📦</h2>
+                <p class="text-xs md:text-sm text-neko-brown/70">Masukkan nomor pesanan (contoh: <code class="bg-neko-cream px-2 py-0.5 rounded font-bold text-neko-darkbrown">#NK-8821</code> atau nomor dari struk belanja) untuk mengecek status terbaru.</p>
+            </div>
+
+            <div class="flex gap-2 mb-6">
+                <input type="text" id="track-input" placeholder="Masukkan No. Pesanan (Cth: #NK-123456)" class="flex-1 px-4 py-3 rounded-2xl border border-neko-peach/50 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-neko-peach font-semibold text-neko-darkbrown">
+                <button onclick="trackOrder()" class="bg-neko-darkbrown hover:bg-neko-brown text-white font-bold px-6 py-3 rounded-2xl transition text-xs md:text-sm shadow flex items-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass"></i> Cek Status
+                </button>
+            </div>
+
+            <!-- Tracking Result Area -->
+            <div id="track-result" class="hidden bg-neko-cream p-6 rounded-2xl border border-neko-peach/40 space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-neko-peach/30 pb-4 gap-2">
+                    <div>
+                        <span class="text-[10px] uppercase font-bold text-gray-400">Nomor Pesanan</span>
+                        <h4 id="res-id" class="font-bold text-base text-neko-darkbrown">#NK-0000</h4>
+                    </div>
+                    <div class="text-left sm:text-right">
+                        <span class="text-[10px] uppercase font-bold text-gray-400">Status Saat Ini</span>
+                        <div id="res-status-badge" class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full mt-0.5">Sedang Dipanggang 🍞</div>
+                    </div>
+                </div>
+
+                <!-- Timeline Progress -->
+                <div class="relative pl-6 space-y-6 border-l-2 border-neko-peach">
+                    <div class="relative">
+                        <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow"></div>
+                        <h5 class="font-bold text-xs text-neko-darkbrown">Pesanan Diterima & Diverifikasi</h5>
+                        <p class="text-[11px] text-gray-500">Pembayaran Anda telah dikonfirmasi oleh admin.</p>
+                    </div>
+                    <div class="relative">
+                        <div id="tl-step-2" class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow"></div>
+                        <h5 class="font-bold text-xs text-neko-darkbrown">Roti Dipanggang Fresh (Fresh From The Oven)</h5>
+                        <p class="text-[11px] text-gray-500">Chef kami sedang menyiapkan dan memanggang pesanan Anda.</p>
+                    </div>
+                    <div class="relative">
+                        <div id="tl-step-3" class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-gray-300 border-2 border-white shadow"></div>
+                        <h5 class="font-bold text-xs text-neko-darkbrown">Dalam Perjalanan Kurir / Siap Diambil</h5>
+                        <p class="text-[11px] text-gray-500">Pesanan sedang diantar ke alamat tujuan Anda.</p>
+                    </div>
+                    <div class="relative">
+                        <div id="tl-step-4" class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-gray-300 border-2 border-white shadow"></div>
+                        <h5 class="font-bold text-xs text-neko-darkbrown">Pesanan Selesai</h5>
+                        <p class="text-[11px] text-gray-500">Terima kasih telah berbelanja di Neko Neko Bakery! 🐾</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-neko-peach/30 text-xs space-y-1">
+                    <div class="flex justify-between"><span>Nama Pemesan:</span> <strong id="res-name">-</strong></div>
+                    <div class="flex justify-between"><span>Alamat Tujuan:</span> <strong id="res-address" class="text-right max-w-[200px] truncate">-</strong></div>
+                    <div class="flex justify-between font-bold text-neko-darkbrown pt-1 border-t"><span>Total Tagihan:</span> <strong id="res-total">Rp 0</strong></div>
+                </div>
+            </div>
+
+            <div id="track-not-found" class="hidden text-center py-6 text-xs text-red-500 font-semibold bg-red-50 rounded-2xl border border-red-100">
+                <i class="fa-solid fa-circle-exclamation text-base mb-1"></i>
+                <p>Nomor pesanan tidak ditemukan. Pastikan nomor pesanan yang Anda masukkan benar (Simpan nomor dari struk saat checkout).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Kami / About Store Section -->
+    <section id="tentang" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white rounded-3xl p-8 md:p-12 border border-neko-peach/30 shadow-sm">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-xs font-bold uppercase tracking-widest bg-neko-pink/50 text-neko-brown px-3 py-1 rounded-full">Tentang Toko Kami</span>
+                <h2 class="text-3xl font-bold text-neko-darkbrown mt-3">Cerita Manis di Balik Neko Neko Bakery 🐾</h2>
+                <p class="text-neko-brown/70 text-sm mt-2">Menghadirkan kelezatan roti gaya Jepang dengan sentuhan rumahan yang hangat dan menyenangkan.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-neko-cream/60 p-6 rounded-2xl border border-neko-peach/20 text-center space-y-3 hover:shadow-md transition">
+                    <div class="w-12 h-12 mx-auto rounded-full bg-neko-warm flex items-center justify-center text-neko-darkbrown text-xl shadow-inner">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-neko-darkbrown">100% Bahan Premium</h3>
+                    <p class="text-xs text-neko-brown/70 leading-relaxed">Kami hanya menggunakan mentega pilihan, tepung berkualitas tinggi, dan bahan-bahan segar alami tanpa pengawet buatan.</p>
+                </div>
+
+                <div class="bg-neko-cream/60 p-6 rounded-2xl border border-neko-peach/20 text-center space-y-3 hover:shadow-md transition">
+                    <div class="w-12 h-12 mx-auto rounded-full bg-neko-warm flex items-center justify-center text-neko-darkbrown text-xl shadow-inner">
+                        <i class="fa-solid fa-bread-slice"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-neko-darkbrown">Fresh From The Oven</h3>
+                    <p class="text-xs text-neko-brown/70 leading-relaxed">Setiap roti dan kue dipanggang setiap hari di dapur kami untuk memastikan tekstur yang super lembut dan aroma yang menggugah selera.</p>
+                </div>
+
+                <div class="bg-neko-cream/60 p-6 rounded-2xl border border-neko-peach/20 text-center space-y-3 hover:shadow-md transition">
+                    <div class="w-12 h-12 mx-auto rounded-full bg-neko-warm flex items-center justify-center text-neko-darkbrown text-xl shadow-inner">
+                        <i class="fa-solid fa-face-smile-beam"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-neko-darkbrown">Penuh Kebahagiaan</h3>
+                    <p class="text-xs text-neko-brown/70 leading-relaxed">Dirancang dengan bentuk yang imut dan estetis, setiap gigitan dirancang untuk menghadirkan senyuman di hari spesialmu!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-neko-darkbrown">Pilihan Roti & Cake Spesial 🍰</h2>
+            <p class="text-neko-brown/70 mt-2">Klik tombol <b>"Beli Sekarang"</b> untuk langsung memesan satuan dengan cepat, atau gunakan tombol <b>+</b> untuk memasukkan ke keranjang.</p>
+        </div>
+
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+    </section>
+
+    <!-- Social Media & Contact Section -->
+    <section id="kontak" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="bg-neko-darkbrown text-neko-cream rounded-3xl p-8 md:p-12 shadow-lg flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="space-y-3 text-center md:text-left">
+                <h2 class="text-3xl font-bold text-white">Ingin Pesan Custom Cake atau Tanya Stok?</h2>
+                <p class="text-neko-pink/80 text-sm max-w-lg">Kami melayani pemesanan via WhatsApp & Instagram. Klik tombol di bawah ini untuk terhubung langsung dengan admin kami!</p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+                <a href="https://wa.me/6282386406010?text=Halo%20Neko%20Neko%20Bakery,%20saya%20ingin%20memesan%20roti" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3.5 rounded-2xl font-bold transition flex items-center gap-3 shadow-md">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    <span>Pesan via WhatsApp</span>
+                </a>
+                <a href="https://www.instagram.com/nekonekobakery.pakam?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" target="_blank" class="bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 hover:opacity-90 text-white px-6 py-3.5 rounded-2xl font-bold transition flex items-center gap-3 shadow-md">
+                    <i class="fa-brands fa-instagram text-2xl"></i>
+                    <span>DM Instagram</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+        <a href="https://www.instagram.com/nekonekobakery.pakam?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" target="_blank" title="Instagram Kami" class="w-14 h-14 bg-gradient-to-tr from-purple-600 to-pink-500 text-white rounded-full flex items-center justify-center text-2xl shadow-xl hover:scale-110 transition duration-300">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/6282386406010?text=Halo%20Neko%20Neko%20Bakery,%20saya%20ingin%20bertanya" target="_blank" title="Chat WhatsApp" class="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center text-2xl shadow-xl hover:scale-110 transition duration-300 animate-pulse">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Modal Change Image -->
+    <div id="image-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-lg text-neko-darkbrown">Ganti Gambar Produk</h3>
+                <button onclick="closeImageModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-neko-brown mb-1">Opsi 1: Link URL Gambar Baru</label>
+                    <input type="url" id="img-url-input" placeholder="https://domain.com/gambar.jpg" class="w-full px-4 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-neko-peach">
+                </div>
+                <div class="text-center text-xs text-gray-400 font-bold">- ATAU -</div>
+                <div>
+                    <label class="block text-xs font-semibold text-neko-brown mb-1">Opsi 2: Upload File dari Komputer</label>
+                    <input type="file" id="img-file-input" accept="image/*" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-neko-warm file:text-neko-darkbrown hover:file:bg-neko-pink">
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeImageModal()" class="px-4 py-2 rounded-xl border text-sm text-gray-600 hover:bg-gray-100">Batal</button>
+                <button onclick="saveProductImage()" class="px-5 py-2 rounded-xl bg-neko-darkbrown text-white text-sm font-semibold hover:bg-neko-brown">Simpan Gambar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detail & Ulasan Per Produk -->
+    <div id="review-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center border-b pb-3">
+                <div>
+                    <span id="modal-product-category" class="text-[10px] font-bold uppercase tracking-wider bg-neko-warm text-neko-brown px-2 py-0.5 rounded-full"></span>
+                    <h3 id="modal-product-title" class="font-bold text-lg text-neko-darkbrown mt-1">Ulasan Produk</h3>
+                </div>
+                <button onclick="closeReviewModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <div id="modal-reviews-list" class="space-y-3 overflow-y-auto max-h-48 pr-1 custom-scrollbar"></div>
+
+            <div class="bg-neko-cream p-4 rounded-2xl border border-neko-peach/30 space-y-3 mt-auto">
+                <h4 class="font-bold text-xs text-neko-darkbrown uppercase tracking-wider">Tulis Ulasan & Rating Produk Ini</h4>
+                <form onsubmit="submitProductReview(event)" class="space-y-3">
+                    <input type="text" id="rev-name" required placeholder="Nama Kamu" class="w-full px-3 py-2 rounded-xl border border-neko-peach/40 text-xs focus:outline-none">
+                    
+                    <div>
+                        <label class="block text-[10px] font-semibold text-neko-brown mb-1">Pilih Bintang Rating (Klik Bintang):</label>
+                        <div class="flex gap-2 text-2xl text-gray-300 cursor-pointer" id="modal-star-input">
+                            <span onclick="setModalRating(1)" class="hover:text-yellow-400 transition">★</span>
+                            <span onclick="setModalRating(2)" class="hover:text-yellow-400 transition">★</span>
+                            <span onclick="setModalRating(3)" class="hover:text-yellow-400 transition">★</span>
+                            <span onclick="setModalRating(4)" class="hover:text-yellow-400 transition">★</span>
+                            <span onclick="setModalRating(5)" class="hover:text-yellow-400 transition">★</span>
+                        </div>
+                    </div>
+
+                    <textarea id="rev-comment" required rows="2" placeholder="Bagaimana rasa roti ini?" class="w-full px-3 py-2 rounded-xl border border-neko-peach/40 text-xs focus:outline-none"></textarea>
+                    
+                    <button type="submit" class="w-full bg-neko-darkbrown hover:bg-neko-brown text-white font-bold py-2.5 rounded-xl text-xs transition shadow">Kirim Ulasan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Direct Buy / Checkout Satuan -->
+    <div id="direct-buy-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b pb-3">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-neko-darkbrown text-xl"></i>
+                    <h3 class="font-bold text-lg text-neko-darkbrown">Formulir Pembelian Langsung</h3>
+                </div>
+                <button onclick="closeDirectBuyModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            </div>
+
+            <!-- Selected Product Summary -->
+            <div class="flex items-center gap-3 bg-neko-cream p-3 rounded-2xl border border-neko-peach/30">
+                <img id="buy-prod-img" src="" class="w-14 h-14 rounded-xl object-cover">
+                <div>
+                    <h4 id="buy-prod-name" class="font-bold text-sm text-neko-darkbrown">Nama Produk</h4>
+                    <span id="buy-prod-price" class="text-xs font-bold text-neko-brown">Rp 0</span>
+                </div>
+            </div>
+
+            <!-- Form Data & Payment -->
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-neko-brown mb-1">Jumlah (Qty):</label>
+                    <input type="number" id="buy-qty" min="1" value="1" onchange="calculateDirectTotal()" class="w-full px-3 py-2 rounded-xl border border-neko-peach/40 text-xs focus:outline-none font-bold text-neko-darkbrown">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-neko-brown mb-1">Nama Lengkap:</label>
+                    <input type="text" id="buy-name" placeholder="Nama Kamu" class="w-full px-3 py-2 rounded-xl border border-neko-peach/40 text-xs focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-neko-brown mb-1">Nomor WhatsApp / HP:</label>
+                    <input type="tel" id="buy-phone" placeholder="Contoh: 08123456789" class="w-full px-3 py-2 rounded-xl border border-neko-peach/40 text-xs focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-neko-brown mb-1">Alamat Lengkap Pengiriman:</label>
+                    <textarea id="buy-address" rows="2" placeholder="Jalan, No Rumah, Kecamatan..." class="w-full px-3 py-2 rounded-xl border border-neko-peach/40 text-xs focus:outline-none"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-neko-brown mb-1">Metode Pembayaran:</label>
+                    <select id="buy-payment" class="w-full px-3 py-2 rounded-xl border border-neko-peach/40 text-xs focus:outline-none bg-white font-medium text-neko-darkbrown">
+                        <option value="Transfer BCA (No. Rek: 1234567890 a.n Neko Bakery)">Transfer Bank BCA</option>
+                        <option value="QRIS (Scan Barcode Toko)">QRIS (Scan All QR)</option>
+                        <option value="E-Wallet GoPay / OVO">E-Wallet (GoPay / OVO)</option>
+                        <option value="Bayar di Tempat (COD)">Bayar di Tempat (COD)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center border-t pt-3 font-bold text-neko-darkbrown text-base">
+                <span>Total Tagihan:</span>
+                <span id="buy-total-price">Rp 0</span>
+            </div>
+
+            <button onclick="processDirectCheckout()" class="w-full bg-neko-darkbrown hover:bg-neko-brown text-white font-bold py-3 rounded-2xl transition flex items-center justify-center gap-2 shadow-md text-sm">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Konfirmasi Pesanan & Cetak Struk</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Cart Drawer / Modal -->
+    <div id="cart-drawer" class="fixed inset-0 bg-black/40 z-50 flex justify-end hidden">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between p-6 overflow-y-auto">
+            <div>
+                <div class="flex justify-between items-center border-b border-neko-warm pb-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-basket-shopping text-neko-darkbrown text-xl"></i>
+                        <h3 class="font-bold text-lg text-neko-darkbrown">Keranjang & Checkout</h3>
+                    </div>
+                    <button onclick="closeCart()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-2xl"></i></button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cart-items" class="mt-4 space-y-4 max-h-[35vh] overflow-y-auto custom-scrollbar pr-1"></div>
+            </div>
+
+            <!-- Cart Footer & Checkout Form -->
+            <div class="border-t border-neko-warm pt-4 space-y-3 mt-4">
+                <div class="flex justify-between items-center text-neko-darkbrown font-bold text-base">
+                    <span>Total Pembayaran:</span>
+                    <span id="cart-total-price">Rp 0</span>
+                </div>
+
+                <div class="space-y-2 bg-neko-cream p-3 rounded-2xl border border-neko-peach/30">
+                    <h4 class="font-bold text-xs text-neko-brown uppercase tracking-wider">Data & Pembayaran Pemesan</h4>
+                    <input type="text" id="cust-name" placeholder="Nama Lengkap" class="w-full px-3 py-2 rounded-xl border border-neko-peach/40 text-xs focus:outline-none">
+                    <input type="tel" id="cust-phone" placeholder="Nomor WhatsApp / HP (Contoh: 0812...)" class="w-full px-3 py-2 rounded-xl border border-neko-peach/40 text-xs focus:outline-none">
+                    <textarea id="cust-address" placeholder="Alamat Lengkap Pengiriman" rows="2" class="w-full px-3 py-2 rounded-xl border border-neko-peach/40 text-xs focus:outline-none"></textarea>
+                    
+                    <div>
+                        <label class="block text-[10px] font-semibold text-neko-brown mb-1">Metode Pembayaran:</label>
+                        <select id="payment-method" class="w-full px-3 py-2 rounded-xl border border-neko-peach/40 text-xs focus:outline-none bg-white font-medium text-neko-darkbrown">
+                            <option value="Transfer BCA (No. Rek: 1234567890 a.n Neko Bakery)">Transfer Bank BCA</option>
+                            <option value="QRIS (Scan Barcode Toko)">QRIS (Scan All QR)</option>
+                            <option value="E-Wallet GoPay / OVO">E-Wallet (GoPay / OVO)</option>
+                            <option value="Bayar di Tempat (COD)">Bayar di Tempat (COD)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="processCheckout()" class="w-full bg-neko-darkbrown hover:bg-neko-brown text-white font-bold py-3 rounded-2xl transition flex items-center justify-center gap-2 shadow-md text-sm">
+                    <i class="fa-solid fa-receipt"></i>
+                    <span>Proses Pesanan & Cetak Struk</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Receipt / Struk Modal -->
+    <div id="receipt-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            
+            <!-- Printable Area -->
+            <div id="receipt-print-area" class="bg-white p-4 rounded-2xl border-2 border-dashed border-neko-peach space-y-3 text-neko-darkbrown">
+                <div class="text-center border-b pb-3">
+                    <h3 class="font-bold text-xl font-brand">Neko Neko Bakery & Cake 🐾</h3>
+                    <p class="text-[11px] text-gray-500">Jl. Imam Bonjol, Tanjung Garbus Satu, Kec. Lubuk Pakam</p>
+                    <p class="text-[11px] font-semibold text-neko-brown mt-1">STRUK BUKTI PEMESANAN RESMI</p>
+                </div>
+
+                <div class="text-xs space-y-1 border-b pb-3">
+                    <div class="flex justify-between"><span>No. Pesanan:</span> <strong id="rec-id">#NK-8821</strong></div>
+                    <div class="flex justify-between"><span>Tanggal:</span> <strong id="rec-date">28 Oct 2026</strong></div>
+                    <div class="flex justify-between"><span>Nama:</span> <strong id="rec-name">-</strong></div>
+                    <div class="flex justify-between"><span>No. HP:</span> <strong id="rec-phone">-</strong></div>
+                    <div class="flex justify-between"><span>Alamat:</span> <strong id="rec-address" class="text-right max-w-[180px] truncate">-</strong></div>
+                    <div class="flex justify-between"><span>Pembayaran:</span> <strong id="rec-payment" class="text-right text-emerald-600">-</strong></div>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-neko-brown">Daftar Produk:</h4>
+                    <div id="rec-items-list" class="space-y-2 text-xs border-b pb-3"></div>
+                </div>
+
+                <div class="space-y-1 text-xs pt-1">
+                    <div class="flex justify-between font-bold text-sm text-neko-darkbrown">
+                        <span>Total Bayar:</span>
+                        <span id="rec-total">Rp 0</span>
+                    </div>
+                </div>
+
+                <div class="text-center pt-3 border-t text-[10px] text-gray-400">
+                    <p>Terima kasih sudah berbelanja di Neko Neko Bakery! ✨</p>
+                    <p>Simpan struk ini sebagai bukti pesanan yang sah.</p>
+                </div>
+            </div>
+
+            <!-- Modal Action Buttons -->
+            <div class="flex gap-2 pt-2">
+                <button onclick="printReceipt()" class="flex-1 bg-neko-darkbrown hover:bg-neko-brown text-white font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow">
+                    <i class="fa-solid fa-print"></i> Cetak / Print Struk
+                </button>
+                <button onclick="closeReceiptModal()" class="px-4 py-2.5 rounded-xl border text-xs text-gray-600 hover:bg-gray-100 font-semibold">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-neko-cream border-t border-neko-peach/30 mt-16 py-8 text-center text-xs text-neko-brown/70">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="font-semibold text-neko-darkbrown text-sm">Neko Neko Bakery & Cake 🐾</p>
+            <p>Jl. Imam Bonjol, Tanjung Garbus Satu, Kec. Lubuk Pakam | Buka Setiap Hari: 07.00 - 22.00 WIB</p>
+            <p class="pt-2 text-gray-400">© 2026 Neko Neko Bakery. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Script -->
+    <script>
+        let products = [
+            { 
+                id: 1, name: "Bika Ambon", category: "Kue", price: 15000, 
+                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiiQJlDadzuQwTFnITpPlAWUz7Grz8mzz0bpBYMQ2HFmEcShZW_QYEo8WDTEahonidPbir9h4bg42SETqyWN1mG0Ne3_P8dpjHiC69wT46s_CnwlOBMEjYsMJ1zP13cDQtBNERj7bfQFFSt/s1600/large-bika-ambon-bukan-dari-bika-medan-005af24735b4c929932e478b4888720b.jpg", 
+                desc: "Khas berpori lembut dengan aroma pandan dan rempah yang harum.",
+                reviews: [
+                    { name: "Siti Rahmawati", rating: 5, comment: "Teksturnya pas banget dan pori-porinya cantik!" },
+                    { name: "Andi Pratama", rating: 5, comment: "Harum rempahnya terasa khas dan legit." }
+                ]
+            },
+            { 
+                id: 2, name: "Donat Rasa", category: "Donat", price: 35000, 
+                image: "https://www.jagel.id/api/listimage/v/Donat-Isi-6-0-2125e11b67d66423.jpg", 
+                desc: "Donat empuk aneka topping lezat dalam satu box.",
+                reviews: [
+                    { name: "Budi Santoso", rating: 4, comment: "Anak-anak suka sekali sama donatnya." },
+                    { name: "Dewi Lestari", rating: 5, comment: "Toppingnya banyak dan rotinya empuk seharian." }
+                ]
+            },
+            { 
+                id: 3, name: "Roti Gulung Abon", category: "Pastry", price: 22000, 
+                image: "https://cdn0-production-images-kly.akamaized.net/WmdYUDmVqYtusMjPpduSYyQYTZg=/1x237:1000x800/680x383/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4150909/original/066454200_1662615038-shutterstock_2141811047.jpg", 
+                desc: "Roti gulung gurih bertabur abon sapi melimpah.",
+                reviews: [
+                    { name: "Jessica Tan", rating: 5, comment: "Abonnya tidak pelit dan rotinya lembut." },
+                    { name: "Rian Hidayat", rating: 5, comment: "Favorit banget buat sarapan!" }
+                ]
+            },
+            { 
+                id: 4, name: "Bolu Gulung", category: "Bolu", price: 28000, 
+                image: "https://i.pinimg.com/736x/c0/8b/f4/c08bf46945378fb94dae409797c9e3f4.jpg", 
+                desc: "Bolu gulung klasik dengan isian selai buah manis.",
+                reviews: [
+                    { name: "Ani Purwanti", rating: 5, comment: "Manisnya pas tidak bikin enek." },
+                    { name: "Slamet Riyadi", rating: 4, comment: "Lembut kuenya pas dimakan." }
+                ]
+            },
+            { 
+                id: 5, name: "Roti Ayam", category: "Donat", price: 12000, 
+                image: "https://img-global.cpcdn.com/recipes/8122c441bd18abcb/1200x630cq80/photo.jpg", 
+                desc: "Roti gurih dengan isian cincang ayam berbumbu.",
+                reviews: [
+                    { name: "Rahmat Hidayat", rating: 5, comment: "Cocok buat sarapan pagi!" },
+                    { name: "Tina", rating: 4, comment: "Isian ayamnya gurih dan enak." }
+                ]
+            },
+            { 
+                id: 6, name: "Brownies", category: "Bolu", price: 30000, 
+                image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=500&q=80", 
+                desc: "Brownies cokelat pekat dengan tekstur fudge lumer.",
+                reviews: [
+                    { name: "Dewi Lestari", rating: 4, comment: "Nyoklat banget rasanya!" },
+                    { name: "Fajar", rating: 5, comment: "Mantap teksturnya legit!" }
+                ]
+            },
+            { 
+                id: 7, name: "Roti Pisang Coklat", category: "Roti", price: 18000, 
+                image: "https://img-global.cpcdn.com/recipes/80b51c8343faf22c/680x482cq70/roti-isi-pisang-cokelat-foto-resep-utama.jpg", 
+                desc: "Perpaduan pisang manis dan lelehan cokelat di dalam roti.",
+                reviews: [
+                    { name: "Fajar", rating: 5, comment: "Mantap pas hangat!" },
+                    { name: "Maya", rating: 5, comment: "Cokelatnya lumer di dalam!" }
+                ]
+            },
+            { 
+                id: 8, name: "Cake Ulang Tahun (mini size)", category: "Cake", price: 120000, 
+                image: "https://1.bp.blogspot.com/-jM5CaFACEkg/XxlIn69bCvI/AAAAAAAAOqE/6V3BUxlbKcclakgzyl5PmoJnJY7RCl0EgCNcBGAsYHQ/s1600/kue_tart_mini.png", 
+                desc: "Kue ulang tahun ukuran mini dengan krim lembut dan hiasan bunga.",
+                reviews: [
+                    { name: "Rian Utama", rating: 5, comment: "Ukurannya besar dan kuenya sangat elegan untuk acara ultah!" },
+                    { name: "Siska", rating: 5, comment: "Krimnya enak dan tidak bikin enek sama sekali." }
+                ]
+            },
+            { 
+                id: 9, name: "Bolu Ketan Hitam", category: "Bolu", price: 45000, 
+                image: "https://youngontop.com/wp-content/uploads/2025/06/68398e6058107-ilustrasi-bolu-ketan-hitam-dengan-keju-yang-lumer-banget_banyuwangi.webp", 
+                desc: "Bolu tradisional khas ketan hitam kukus dengan tekstur empuk dan legit.",
+                reviews: [
+                    { name: "Suryani", rating: 5, comment: "Rasanya gurih manis, empuk banget di lidah." },
+                    { name: "Budi", rating: 4, comment: "Ketan hitamnya terasa asli dan harum." }
+                ]
+            },
+            { 
+                id: 10, name: "Bolu Lapis", category: "Bolu", price: 20000, 
+                image: "https://i.pinimg.com/originals/45/40/ac/4540ac8725167184cfd061bd0a8d40e9.jpg", 
+                desc: "Kue lapis tradisional legit dan kenyal.",
+                reviews: [
+                    { name: "Slamet", rating: 3, comment: "Lumayan enak buat temen ngeteh." },
+                    { name: "Ani", rating: 4, comment: "Kenyalnya pas." }
+                ]
+            },
+            { 
+                id: 11, name: "Kue Lapis Legit", category: "Kue", price: 10000, 
+                image: "https://foto.kontan.co.id/muhXv7stb39oscs9xva8jjDsDp4=/smart/filters:format(webp)/2024/04/16/722935914.jpg", 
+                desc: "Lapis legit premium dengan rempah spekuk.",
+                reviews: [
+                    { name: "Hesti", rating: 4, comment: "Rasa menteganya terasa mewah." },
+                    { name: "Doni", rating: 5, comment: "Lembut lapisannya!" }
+                ]
+            },
+            { 
+                id: 12, name: "Roti Manis", category: "Roti", price: 15000, 
+                image: "https://i.ytimg.com/vi/d6l-gsIYMik/maxresdefault.jpg", 
+                desc: "Roti lembut aneka isian favorit keluarga.",
+                reviews: [
+                    { name: "Doni", rating: 5, comment: "Empuk dan selalu fresh." },
+                    { name: "Siti", rating: 5, comment: "Roti andalan keluarga." }
+                ]
+            },
+            { 
+                id: 13, name: "Birthday Chocolate Cake (Big Size)", category: "Cake", price: 250000, 
+                image: "https://i.pinimg.com/originals/eb/c8/c8/ebc8c8cc3fae3e9062cebc723b1ef25e.jpg", 
+                desc: "Kue ulang tahun cokelat besar berlapis ganache premium dan taburan choco chips.",
+                reviews: [
+                    { name: "Melinda", rating: 5, comment: "Cokelatnya pekat dan mewah, sangat puas pesan ukuran besar ini!" },
+                    { name: "Agus", rating: 5, comment: "Recommended banget buat kejutan ulang tahun!" }
+                ]
+            },
+            { 
+                id: 14, name: "Bolu Pandan Santan", category: "Bolu", price: 40000, 
+                image: "https://i.pinimg.com/originals/eb/11/34/eb1134a51eb3992b27a1641443582a31.png", 
+                desc: "Bolu pandan wangi dengan ekstrak daun suji asli dan santan kental gurih.",
+                reviews: [
+                    { name: "Arief", rating: 5, comment: "Harum pandannya semerbak dan kuenya lembut sekali." },
+                    { name: "Wati", rating: 5, comment: "Rasanya gurih santannya pas." }
+                ]
+            },
+            { 
+                id: 15, name: "Roti Sosis Keju", category: "Roti", price: 17000, 
+                image: "https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/995/2023/12/31/WhatsApp-Image-2023-12-30-at-215231_f36b3156-1019780348.jpg", 
+                desc: "Roti isi sosis sapi pilihan bertabur keju mozarella melted.",
+                reviews: [
+                    { name: "Kevin", rating: 4, comment: "Gurih dan kejunya melimpah." },
+                    { name: "Nanda", rating: 5, comment: "Enak banget pas dimakan hangat." }
+                ]
+            },
+            { 
+                id: 16, name: "Red Velvet Slice", category: "Cake", price: 35000, 
+                image: "https://www.homeydishes.com/wp-content/uploads/2025/11/Red-Velvet-Roll-Slice.webp", 
+                desc: "Kue red velvet lembut berlapis cream cheese manis gurih.",
+                reviews: [
+                    { name: "Vina", rating: 5, comment: "Kuenya sangat cantik dan lezat!" },
+                    { name: "Dedi", rating: 5, comment: "Cream cheesenya mantap." }
+                ]
+            }
+        ];
+
+        // Daftar Produk Promo Spesial Hari Ini
+        let promoProducts = [
+            { id: 13, name: "Birthday Chocolate Cake (Big Size)", category: "Cake", originalPrice: 250000, price: 199000, discount: "20%", image: "https://i.pinimg.com/originals/eb/c8/c8/ebc8c8cc3fae3e9062cebc723b1ef25e.jpg", desc: "Kue ulang tahun cokelat besar berlapis ganache premium." },
+            { id: 2, name: "Donat Rasa (Box isi 6)", category: "Donat", originalPrice: 35000, price: 28000, discount: "20%", image: "https://www.jagel.id/api/listimage/v/Donat-Isi-6-0-2125e11b67d66423.jpg", desc: "Donat empuk aneka topping lezat dalam satu box." },
+            { id: 3, name: "Roti Gulung Abon", category: "Pastry", originalPrice: 22000, price: 17500, discount: "20%", image: "https://cdn0-production-images-kly.akamaized.net/WmdYUDmVqYtusMjPpduSYyQYTZg=/1x237:1000x800/680x383/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4150909/original/066454200_1662615038-shutterstock_2141811047.jpg", desc: "Roti gulung gurih bertabur abon sapi melimpah." }
+        ];
+
+        // Database Pesanan Aktif untuk Simulasi Lacak Pesanan
+        let ordersDatabase = {};
+
+        let cart = [];
+        let selectedProductIdForImage = null;
+        let activeReviewProductId = null;
+        let currentModalRating = 0;
+        let activeDirectBuyProduct = null;
+
+        function getAverageRating(reviewsArray) {
+            if (!reviewsArray || reviewsArray.length === 0) return 0;
+            const sum = reviewsArray.reduce((acc, r) => acc + r.rating, 0);
+            return (sum / reviewsArray.length).toFixed(1);
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = products.map(p => {
+                const avgRating = getAverageRating(p.reviews);
+                const reviewCount = p.reviews.length;
+                
+                return `
+                <div class="bg-white rounded-3xl p-4 border border-neko-peach/30 shadow-sm hover:shadow-md transition flex flex-col justify-between relative group">
+                    <button onclick="openImageModal(${p.id})" class="absolute top-6 right-6 z-10 bg-white/80 hover:bg-white text-neko-darkbrown p-2 rounded-full shadow border border-neko-peach/30 transition" title="Ganti Gambar Produk">
+                        <i class="fa-solid fa-pen-to-square text-xs"></i>
+                    </button>
+                    <div>
+                        <div class="h-44 rounded-2xl overflow-hidden bg-neko-warm mb-3">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider bg-neko-warm text-neko-brown px-2.5 py-1 rounded-full">${p.category}</span>
+                            <button onclick="openReviewModal(${p.id})" class="text-xs font-semibold text-neko-accent hover:underline flex items-center gap-1">
+                                <i class="fa-solid fa-star text-yellow-400"></i> ${avgRating} (${reviewCount})
+                            </button>
+                        </div>
+                        <h3 class="font-bold text-base text-neko-darkbrown mt-2 leading-snug">${p.name}</h3>
+                        <p class="text-xs text-neko-brown/70 mt-1 line-clamp-2">${p.desc}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-neko-warm flex items-center justify-between gap-2">
+                        <span class="font-bold text-neko-darkbrown text-sm sm:text-base">Rp ${p.price.toLocaleString('id-ID')}</span>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openDirectBuyModal(${p.id})" class="bg-neko-darkbrown hover:bg-neko-brown text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow">
+                                Beli Sekarang
+                            </button>
+                            <button onclick="addToCart(${p.id})" class="bg-neko-warm hover:bg-neko-peach text-neko-darkbrown p-2.5 rounded-xl transition flex items-center justify-center" title="Tambah ke Keranjang">
+                                <i class="fa-solid fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }).join('');
+
+            const promoGrid = document.getElementById('promo-grid');
+            promoGrid.innerHTML = promoProducts.map(p => `
+                <div class="bg-white rounded-3xl p-4 border border-orange-200 shadow-sm hover:shadow-md transition flex flex-col justify-between relative group">
+                    <span class="absolute top-6 left-6 z-10 bg-red-500 text-white text-[10px] font-extrabold px-3 py-1 rounded-full shadow">
+                        DISKON ${p.discount}
+                    </span>
+                    <div>
+                        <div class="h-44 rounded-2xl overflow-hidden bg-neko-warm mb-3">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-orange-100 text-orange-700 px-2.5 py-1 rounded-full">${p.category}</span>
+                        <h3 class="font-bold text-base text-neko-darkbrown mt-2 leading-snug">${p.name}</h3>
+                        <p class="text-xs text-neko-brown/70 mt-1 line-clamp-2">${p.desc}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-orange-100 flex items-center justify-between gap-2">
+                        <div>
+                            <span class="text-[11px] text-gray-400 line-through">Rp ${p.originalPrice.toLocaleString('id-ID')}</span>
+                            <div class="font-bold text-red-600 text-sm sm:text-base">Rp ${p.price.toLocaleString('id-ID')}</div>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openDirectBuyModalPromo(${p.id})" class="bg-red-500 hover:bg-red-600 text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow">
+                                Beli Promo
+                            </button>
+                            <button onclick="addToCartPromo(${p.id})" class="bg-orange-100 hover:bg-orange-200 text-neko-darkbrown p-2.5 rounded-xl transition flex items-center justify-center" title="Tambah ke Keranjang">
+                                <i class="fa-solid fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Fitur Lacak Pesanan
+        function trackOrder() {
+            const query = document.getElementById('track-input').value.trim();
+            const resultBox = document.getElementById('track-result');
+            const notFoundBox = document.getElementById('track-not-found');
+
+            if (!query) {
+                alert("Silakan masukkan nomor pesanan terlebih dahulu!");
+                return;
+            }
+
+            const foundOrder = ordersDatabase[query];
+
+            if (foundOrder) {
+                document.getElementById('res-id').innerText = foundOrder.id;
+                document.getElementById('res-name').innerText = foundOrder.name;
+                document.getElementById('res-address').innerText = foundOrder.address;
+                document.getElementById('res-total').innerText = `Rp ${foundOrder.total.toLocaleString('id-ID')}`;
+
+                const badge = document.getElementById('res-status-badge');
+                const step2 = document.getElementById('tl-step-2');
+                const step3 = document.getElementById('tl-step-3');
+
+                if (foundOrder.status === 'Dipanggang') {
+                    badge.innerText = 'Sedang Dipanggang 🍞';
+                    badge.className = 'inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full mt-0.5';
+                    step2.className = 'absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow';
+                    step3.className = 'absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-gray-300 border-2 border-white shadow';
+                } else {
+                    badge.innerText = 'Dalam Perjalanan Kurir 🛵';
+                    badge.className = 'inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full mt-0.5';
+                    step2.className = 'absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow';
+                    step3.className = 'absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow';
+                }
+
+                resultBox.classList.remove('hidden');
+                notFoundBox.classList.add('hidden');
+            } else {
+                resultBox.classList.add('hidden');
+                notFoundBox.classList.remove('hidden');
+            }
+        }
+
+        // Direct Buy for Promo
+        function openDirectBuyModalPromo(promoId) {
+            const promo = promoProducts.find(p => p.id === promoId);
+            if (!promo) return;
+            activeDirectBuyProduct = { id: promo.id, name: promo.name, price: promo.price, image: promo.image };
+
+            document.getElementById('buy-prod-img').src = promo.image;
+            document.getElementById('buy-prod-name').innerText = promo.name + " (PROMO)";
+            document.getElementById('buy-prod-price').innerText = `Rp ${promo.price.toLocaleString('id-ID')}`;
+            document.getElementById('buy-qty').value = 1;
+            
+            document.getElementById('buy-name').value = '';
+            document.getElementById('buy-phone').value = '';
+            document.getElementById('buy-address').value = '';
+            
+            calculateDirectTotal();
+            document.getElementById('direct-buy-modal').classList.remove('hidden');
+        }
+
+        function addToCartPromo(promoId) {
+            const promo = promoProducts.find(p => p.id === promoId);
+            const itemInCart = cart.find(c => c.id === promo.id);
+
+            if (itemInCart) {
+                itemInCart.qty += 1;
+            } else {
+                cart.push({ id: promo.id, name: promo.name + " (Promo)", price: promo.price, image: promo.image, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        function openDirectBuyModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            activeDirectBuyProduct = product;
+
+            document.getElementById('buy-prod-img').src = product.image;
+            document.getElementById('buy-prod-name').innerText = product.name;
+            document.getElementById('buy-prod-price').innerText = `Rp ${product.price.toLocaleString('id-ID')}`;
+            document.getElementById('buy-qty').value = 1;
+            
+            document.getElementById('buy-name').value = '';
+            document.getElementById('buy-phone').value = '';
+            document.getElementById('buy-address').value = '';
+            
+            calculateDirectTotal();
+            document.getElementById('direct-buy-modal').classList.remove('hidden');
+        }
+
+        function closeDirectBuyModal() {
+            document.getElementById('direct-buy-modal').classList.add('hidden');
+            activeDirectBuyProduct = null;
+        }
+
+        function calculateDirectTotal() {
+            if (!activeDirectBuyProduct) return;
+            const qty = parseInt(document.getElementById('buy-qty').value) || 1;
+            const total = activeDirectBuyProduct.price * qty;
+            document.getElementById('buy-total-price').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        function processDirectCheckout() {
+            if (!activeDirectBuyProduct) return;
+            const qty = parseInt(document.getElementById('buy-qty').value) || 1;
+            const name = document.getElementById('buy-name').value.trim();
+            const phone = document.getElementById('buy-phone').value.trim();
+            const address = document.getElementById('buy-address').value.trim();
+            const paymentMethod = document.getElementById('buy-payment').value;
+
+            if (!name || !phone || !address) {
+                alert("Mohon lengkapi Nama, No HP/WhatsApp, dan Alamat Pengiriman terlebih dahulu!");
+                return;
+            }
+
+            const orderId = "#NK-" + Math.floor(100000 + Math.random() * 900000);
+            const currentDate = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+            const total = activeDirectBuyProduct.price * qty;
+
+            ordersDatabase[orderId] = {
+                id: orderId,
+                name: name,
+                address: address,
+                total: total,
+                status: 'Dipanggang'
+            };
+
+            document.getElementById('rec-id').innerText = orderId;
+            document.getElementById('rec-date').innerText = currentDate;
+            document.getElementById('rec-name').innerText = name;
+            document.getElementById('rec-phone').innerText = phone;
+            document.getElementById('rec-address').innerText = address;
+            document.getElementById('rec-payment').innerText = paymentMethod;
+
+            const recItemsContainer = document.getElementById('rec-items-list');
+            recItemsContainer.innerHTML = `
+                <div class="flex justify-between">
+                    <span>${activeDirectBuyProduct.name} (x${qty})</span>
+                    <span>Rp ${total.toLocaleString('id-ID')}</span>
+                </div>
+            `;
+
+            document.getElementById('rec-total').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+
+            closeDirectBuyModal();
+            document.getElementById('receipt-modal').classList.remove('hidden');
+        }
+
+        function openReviewModal(productId) {
+            activeReviewProductId = productId;
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            document.getElementById('modal-product-title').innerText = product.name;
+            document.getElementById('modal-product-category').innerText = product.category;
+            
+            renderModalReviews(product.reviews);
+            setModalRating(0);
+            document.getElementById('review-modal').classList.remove('hidden');
+        }
+
+        function closeReviewModal() {
+            document.getElementById('review-modal').classList.add('hidden');
+            activeReviewProductId = null;
+        }
+
+        function renderModalReviews(reviewsArray) {
+            const container = document.getElementById('modal-reviews-list');
+            if (reviewsArray.length === 0) {
+                container.innerHTML = `<div class="text-center py-4 text-xs text-neko-brown/60">Belum ada ulasan untuk produk ini. Jadilah yang pertama! 🐾</div>`;
+                return;
+            }
+
+            container.innerHTML = reviewsArray.map(r => `
+                <div class="bg-neko-cream/60 p-3 rounded-xl border border-neko-peach/30">
+                    <div class="flex items-center justify-between">
+                        <h5 class="font-bold text-xs text-neko-darkbrown">${r.name}</h5>
+                        <div class="text-yellow-400 text-[10px]">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
+                    </div>
+                    <p class="text-xs text-neko-brown/80 mt-1">"${r.comment}"</p>
+                </div>
+            `).join('');
+        }
+
+        function setModalRating(rating) {
+            currentModalRating = rating;
+            const stars = document.getElementById('modal-star-input').children;
+            for (let i = 0; i < stars.length; i++) {
+                if (i < rating) {
+                    stars[i].classList.add('text-yellow-400');
+                    stars[i].classList.remove('text-gray-300');
+                } else {
+                    stars[i].classList.remove('text-yellow-400');
+                    stars[i].classList.add('text-gray-300');
+                }
+            }
+        }
+
+        function submitProductReview(e) {
+            e.preventDefault();
+            const name = document.getElementById('rev-name').value.trim();
+            const comment = document.getElementById('rev-comment').value.trim();
+
+            if (currentModalRating === 0) {
+                alert("Silakan beri rating bintang terlebih dahulu (klik 1 - 5 bintang)!");
+                return;
+            }
+
+            if (!name || !comment) return;
+
+            const product = products.find(p => p.id === activeReviewProductId);
+            if (product) {
+                product.reviews.unshift({ name, rating: currentModalRating, comment });
+                renderModalReviews(product.reviews);
+                renderProducts();
+                
+                document.getElementById('rev-name').value = '';
+                document.getElementById('rev-comment').value = '';
+                setModalRating(0);
+            }
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const itemInCart = cart.find(c => c.id === id);
+
+            if (itemInCart) {
+                itemInCart.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        function updateCartQty(id, change) {
+            const item = cart.find(c => c.id === id);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) {
+                    cart = cart.filter(c => c.id !== id);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-badge').innerText = count;
+
+            const itemsContainer = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = `<div class="text-center py-8 text-xs text-neko-brown/60">Keranjang masih kosong 🐾</div>`;
+            } else {
+                itemsContainer.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between border-b border-neko-warm pb-3">
+                        <div class="flex items-center gap-3">
+                            <img src="${item.image}" class="w-12 h-12 rounded-xl object-cover">
+                            <div>
+                                <h4 class="font-bold text-xs text-neko-darkbrown">${item.name}</h4>
+                                <span class="text-xs text-neko-brown">Rp ${item.price.toLocaleString('id-ID')}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 bg-neko-cream px-2 py-1 rounded-lg border">
+                            <button onclick="updateCartQty(${item.id}, -1)" class="text-xs px-1 text-neko-brown font-bold">-</button>
+                            <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                            <button onclick="updateCartQty(${item.id}, 1)" class="text-xs px-1 text-neko-brown font-bold">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('cart-total-price').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        function openCart() {
+            document.getElementById('cart-drawer').classList.remove('hidden');
+        }
+
+        function closeCart() {
+            document.getElementById('cart-drawer').classList.add('hidden');
+        }
+
+        function processCheckout() {
+            if (cart.length === 0) {
+                alert("Keranjang belanja kamu masih kosong!");
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+            const paymentMethod = document.getElementById('payment-method').value;
+
+            if (!name || !phone || !address) {
+                alert("Mohon lengkapi Nama, No HP/WhatsApp, dan Alamat Pengiriman terlebih dahulu!");
+                return;
+            }
+
+            const orderId = "#NK-" + Math.floor(100000 + Math.random() * 900000);
+            const currentDate = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            ordersDatabase[orderId] = {
+                id: orderId,
+                name: name,
+                address: address,
+                total: total,
+                status: 'Dipanggang'
+            };
+
+            document.getElementById('rec-id').innerText = orderId;
+            document.getElementById('rec-date').innerText = currentDate;
+            document.getElementById('rec-name').innerText = name;
+            document.getElementById('rec-phone').innerText = phone;
+            document.getElementById('rec-address').innerText = address;
+            document.getElementById('rec-payment').innerText = paymentMethod;
+
+            const recItemsContainer = document.getElementById('rec-items-list');
+            recItemsContainer.innerHTML = cart.map(item => `
+                <div class="flex justify-between">
+                    <span>${item.name} (x${item.qty})</span>
+                    <span>Rp ${(item.price * item.qty).toLocaleString('id-ID')}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('rec-total').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+
+            closeCart();
+            document.getElementById('receipt-modal').classList.remove('hidden');
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receipt-modal').classList.add('hidden');
+            cart = [];
+            updateCartUI();
+            document.getElementById('cust-name').value = '';
+            document.getElementById('cust-phone').value = '';
+            document.getElementById('cust-address').value = '';
+        }
+
+        function printReceipt() {
+            window.print();
+        }
+
+        function openImageModal(productId) {
+            selectedProductIdForImage = productId;
+            document.getElementById('img-url-input').value = '';
+            document.getElementById('img-file-input').value = '';
+            document.getElementById('image-modal').classList.remove('hidden');
+        }
+
+        function closeImageModal() {
+            document.getElementById('image-modal').classList.add('hidden');
+        }
+
+        function saveProductImage() {
+            const urlInput = document.getElementById('img-url-input').value.trim();
+            const fileInput = document.getElementById('img-file-input').files[0];
+
+            if (fileInput) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    updateProductImageSrc(e.target.result);
+                }
+                reader.readAsDataURL(fileInput);
+            } else if (urlInput) {
+                updateProductImageSrc(urlInput);
+            } else {
+                alert("Silakan masukkan URL gambar atau upload file!");
+            }
+        }
+
+        function updateProductImageSrc(newSrc) {
+            const prod = products.find(p => p.id === selectedProductIdForImage);
+            if (prod) {
+                prod.image = newSrc;
+                renderProducts();
+                closeImageModal();
+            }
+        }
+
+        window.onload = () => {
+            renderProducts();
+        };
+    </script>
+</body>
+</html>
